@@ -563,4 +563,21 @@ class ProductService extends AbstractService
             'product_id' => TypeCaster::cast($productId, 'arrOfStr'),
         ]);
     }
+
+    /**
+     * Receive product description info.
+     *
+     * @see https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductInfoDescription
+     *
+     * @param int $productId Id of product in Ozon system
+     *
+     * @return array
+     */
+    public function descriptionInfo(int $productId)
+    {
+        $query = ['product_id' => $productId];
+        $query = TypeCaster::castArr($query, ['product_id' => 'int']);
+
+        return $this->request('POST', '/v1/product/info/description', $query);
+    }
 }
