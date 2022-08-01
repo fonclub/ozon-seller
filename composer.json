@@ -1,6 +1,6 @@
 {
-    "name": "gam6itko/ozon-seller",
-    "description": "Ozon Seller Api for transhore sales",
+    "name": "fonclub/ozon-seller",
+    "description": "Ozon Seller Api for transhore sales (fork gam6itko/ozon-seller)",
     "keywords": ["ozon", "marketplace", "api", "russia", "seller", "crossborder"],
     "type": "library",
     "license": "MIT",
