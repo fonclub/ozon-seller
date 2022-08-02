@@ -82,4 +82,23 @@ class CategoryService extends AbstractService
 
         return $this->request('POST', "{$this->path}/attribute/value/by-option", $body);
     }
+    /**
+     * Receive the list of all available item categories.
+     *
+     * @see https://docs.ozon.ru/api/seller/#operation/CategoryAPI_GetCategoryTree
+     *
+     * @param int    $categoryId
+     * @param string $language   [EN, RU]
+     *
+     * @return array
+     */
+    public function tree(int $categoryId = null, string $language = 'RU')
+    {
+        $query = array_filter([
+            'category_id' => $categoryId,
+            'language'    => strtoupper($language),
+        ]);
+
+        return $this->request('POST', '/v2/category/tree', $query);
+    }
 }
