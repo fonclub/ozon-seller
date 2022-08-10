@@ -241,4 +241,13 @@ class ProductService extends AbstractService
 
         return $this->request('POST', "{$this->path}s/delete", $input);
     }
+
+    /**
+     * Get info about products limit
+     * @return array
+     */
+    public function infoLimit(): array
+    {
+        return $this->request('POST', "{$this->path}/info/limit");
+    }
 }
