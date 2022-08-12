@@ -580,4 +580,28 @@ class ProductService extends AbstractService
 
         return $this->request('POST', '/v1/product/info/description', $query);
     }
+
+
+
+    /**
+     * Information about seller's stock balances (FBS and rFBS)
+     *
+     * @param mixed $fbs_sku
+     *
+     * @see https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductStocksByWarehouseFbs
+     *
+     * @return array
+     */
+    public function infoStocksByWarehouseFbs(mixed $fbs_sku)
+    {
+        if ( ! is_array($fbs_sku)) {
+            $fbs_sku = [$fbs_sku];
+        }
+
+        $query = ['fbs_sku' => $fbs_sku];
+
+        $query = TypeCaster::castArr($query, ['fbs_sku' => 'arrayOfInt']);
+
+        return $this->request('POST', '/v1/product/info/stocks-by-warehouse/fbs', $query);
+    }
 }
