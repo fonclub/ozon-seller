@@ -140,7 +140,7 @@ class FbsService extends AbstractService implements HasOrdersInterface, HasUnful
      */
     public function cancel(string $postingNumber, int $cancelReasonId, string $cancelReasonMessage = null): bool
     {
-        $body = [
+        $body   = [
             'posting_number'        => $postingNumber,
             'cancel_reason_id'      => $cancelReasonId,
             'cancel_reason_message' => $cancelReasonMessage,
@@ -152,7 +152,8 @@ class FbsService extends AbstractService implements HasOrdersInterface, HasUnful
 
     public function cancelReasons(): array
     {
-        return $this->request('POST', "{$this->path}/cancel-reason/list", '{}'); //todo свериться с исправленной документацией
+        return $this->request('POST', "{$this->path}/cancel-reason/list",
+            '{}'); //todo свериться с исправленной документацией
     }
 
     /**
@@ -192,6 +193,7 @@ class FbsService extends AbstractService implements HasOrdersInterface, HasUnful
         $config = [
             'containers_count'   => 'int',
             'delivery_method_id' => 'int',
+            'departure_date'     => 'string',
         ];
 
         $params = ArrayHelper::pick($params, array_keys($config));
