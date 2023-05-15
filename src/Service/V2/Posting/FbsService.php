@@ -310,4 +310,31 @@ class FbsService extends AbstractService implements HasOrdersInterface, HasUnful
     {
         return $this->request('POST', "{$this->path}/digital/act/get-pdf", ['id' => $id, 'doc_type' => $doc_type], false);
     }
+
+    /**
+     * @see https://docs.ozon.ru/api/seller/#operation/PostingAPI_FbsActList
+     */
+    public function actsList(array $requestData = []): array
+    {
+        $default = [
+            'filter' => [],
+            'limit'  => 100,
+        ];
+
+        $requestData = array_merge(
+            $default,
+            ArrayHelper::pick($requestData, array_keys($default))
+        );
+
+        $filter = ArrayHelper::pick($requestData['filter'], ['date_from', 'date_to', 'integration_type', 'status']);
+        foreach (['date_from', 'date_to'] as $key) {
+            if (!isset($filter[$key])) {
+                $filter[$key] = date('Y-m-d');
+            }
+        }
+
+        $requestData['filter'] = $filter;
+
+        return $this->request('POST', "{$this->path}/act/list", $requestData);
+    }
 }
